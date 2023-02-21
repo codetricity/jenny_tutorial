@@ -9,6 +9,10 @@ import 'main.dart';
 
 class ProjectViewComponent extends PositionComponent
     with DialogueView, HasGameRef<JennyGame> {
+  late final TextBoxComponent mainDialogueTextComponent;
+  final dialoguePaint = TextPaint(
+      style: const TextStyle(
+          backgroundColor: Color.fromARGB(180, 158, 158, 158), fontSize: 30));
   final background = SpriteComponent();
   final girl = SpriteComponent();
   final boy = SpriteComponent();
@@ -38,7 +42,19 @@ class ProjectViewComponent extends PositionComponent
             _forwardCompleter.complete();
           }
         });
-    addAll([background, girl, boy, forwardButtonComponent]);
+    mainDialogueTextComponent = TextBoxComponent(
+      text: 'Press next to begin the story of Ken and Akemi',
+      position: Vector2(50, gameRef.size.y * .8),
+      boxConfig: TextBoxConfig(maxWidth: gameRef.size.x * .8),
+      textRenderer: dialoguePaint,
+    );
+    addAll([
+      background,
+      girl,
+      boy,
+      forwardButtonComponent,
+      mainDialogueTextComponent
+    ]);
     return super.onLoad();
   }
 
@@ -52,7 +68,7 @@ class ProjectViewComponent extends PositionComponent
   Future<void> _advance(DialogueLine line) async {
     var characterName = line.character?.name ?? '';
     var dialogueLineText = '$characterName: ${line.text}';
-
+    mainDialogueTextComponent.text = dialogueLineText;
     debugPrint('debug: $dialogueLineText');
     return _forwardCompleter.future;
   }
