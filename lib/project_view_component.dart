@@ -19,6 +19,9 @@ class ProjectViewComponent extends PositionComponent
   late final ButtonComponent forwardButtonComponent;
   // to control flow with button presses
   Completer<void> _forwardCompleter = Completer();
+  Completer<int> _choiceCompleter = Completer<int>();
+
+  List<ButtonComponent> optionsList = [];
 
   @override
   FutureOr<void> onLoad() {
@@ -63,6 +66,41 @@ class ProjectViewComponent extends PositionComponent
     _forwardCompleter = Completer();
     await _advance(line);
     return super.onLineStart(line);
+  }
+
+  @override
+  FutureOr<int?> onChoiceStart(DialogueChoice choice) async {
+    _choiceCompleter = Completer<int>();
+    forwardButtonComponent.removeFromParent();
+    mainDialogueTextComponent.text = 'make your choice';
+    for (int i = 0; i < choice.options.length; i++) {
+      optionsList.add(
+        ButtonComponent(
+            position: Vector2(30, i * 50 + 50),
+            button: TextComponent(
+                text: 'Choice ${i + 1}: ${choice.options[i].text}'),
+            onPressed: () {
+              if (!_choiceCompleter.isCompleted) {
+                _choiceCompleter.complete(i);
+              }
+            }),
+      );
+    }
+    addAll(optionsList);
+    await _getChoice(choice);
+    return _choiceCompleter.future;
+  }
+
+  @override
+  FutureOr<void> onChoiceFinish(DialogueOption option) {
+    mainDialogueTextComponent.text = 'decision is ${option.text}';
+    removeAll(optionsList);
+    optionsList = [];
+    add(forwardButtonComponent);
+  }
+
+  Future<void> _getChoice(DialogueChoice choice) async {
+    return _forwardCompleter.future;
   }
 
   Future<void> _advance(DialogueLine line) async {

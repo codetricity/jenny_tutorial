@@ -1,5 +1,5 @@
 name: jenny_tutorial
-description: A new Flutter project.
+description: Jenny Demo
 # The following line prevents the package from being accidentally published to
 # pub.dev using `flutter pub publish`. This is preferred for private packages.
 publish_to: 'none' # Remove this line if you wish to publish to pub.dev
@@ -31,7 +31,13 @@ dependencies:
   flutter:
     sdk: flutter
   flame: ^1.6.0
-  jenny: ^1.0.0
+  jenny:
+    git:
+      url: https://github.com/flame-engine/flame.git
+      path: packages/flame_jenny/jenny
+      ref: main
+
+  # jenny: ^1.0.0
 
 
   # The following adds the Cupertino Icons font to your application.

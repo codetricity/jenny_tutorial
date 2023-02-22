@@ -86,10 +86,11 @@ packages:
   jenny:
     dependency: "direct main"
     description:
-      name: jenny
-      sha256: "9722848c258ff955fe34cd104993e9b467215dceb8a6319a3de8cc5ee8616af8"
-      url: "https://pub.dev"
-    source: hosted
+      path: "packages/flame_jenny/jenny"
+      ref: main
+      resolved-ref: "73467c941d89f68598c6dc297937af9d9896a949"
+      url: "https://github.com/flame-engine/flame.git"
+    source: git
     version: "1.0.0"
   js:
     dependency: transitive
