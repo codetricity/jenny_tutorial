@@ -11,9 +11,11 @@ Ken: Me too. I'll be starting at Columbia.
    Akemi: Oh, I'm getting hungry.  I was just thinking of eating.
    Ken: Awesome.  How about Maison de Cafe?
    Akemi: Ok. Let's go. 
+   <<jump Cafe>>
 -> Hope to see you again
    Akemi: Yea, maybe we'll meet again?
    Ken: I hope so.
+   <<jump Beach>>
 -> I'd like to go on a date with you
    Akemi: That's nice, but I don't want to date anyone on this cruise
    Ken: Yea, if it doesn't work out, it would be awkward. 

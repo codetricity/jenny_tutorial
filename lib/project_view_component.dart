@@ -12,7 +12,7 @@ class ProjectViewComponent extends PositionComponent
   late final TextBoxComponent mainDialogueTextComponent;
   final dialoguePaint = TextPaint(
       style: const TextStyle(
-          backgroundColor: Color.fromARGB(180, 158, 158, 158), fontSize: 30));
+          backgroundColor: Color.fromARGB(180, 85, 84, 84), fontSize: 36));
   final background = SpriteComponent();
   final girl = SpriteComponent();
   final boy = SpriteComponent();
@@ -76,9 +76,11 @@ class ProjectViewComponent extends PositionComponent
     for (int i = 0; i < choice.options.length; i++) {
       optionsList.add(
         ButtonComponent(
-            position: Vector2(30, i * 50 + 50),
+            position: Vector2(30, i * 70 + 100),
             button: TextComponent(
-                text: 'Choice ${i + 1}: ${choice.options[i].text}'),
+              text: 'Choice ${i + 1}: ${choice.options[i].text}',
+              textRenderer: dialoguePaint,
+            ),
             onPressed: () {
               if (!_choiceCompleter.isCompleted) {
                 _choiceCompleter.complete(i);
@@ -97,6 +99,20 @@ class ProjectViewComponent extends PositionComponent
     removeAll(optionsList);
     optionsList = [];
     add(forwardButtonComponent);
+  }
+
+  @override
+  FutureOr<void> onNodeStart(Node node) {
+    switch (node.title) {
+      case 'Cafe':
+        background.sprite = gameRef.cafeBackgroundSprite;
+        break;
+      case 'Beach':
+        background.sprite = gameRef.beachBackgroundSprite;
+        girl.sprite = gameRef.girlSurprisedSprite;
+        break;
+    }
+    return super.onNodeStart(node);
   }
 
   Future<void> _getChoice(DialogueChoice choice) async {
