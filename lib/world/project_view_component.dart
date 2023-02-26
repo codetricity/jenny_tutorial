@@ -5,7 +5,8 @@ import 'package:flame/input.dart';
 import 'package:flutter/material.dart';
 import 'package:jenny/jenny.dart';
 
-import 'main.dart';
+import '../actors/character_component.dart';
+import '../main.dart';
 
 class ProjectViewComponent extends PositionComponent
     with DialogueView, HasGameRef<JennyGame> {
@@ -14,8 +15,8 @@ class ProjectViewComponent extends PositionComponent
       style: const TextStyle(
           backgroundColor: Color.fromARGB(180, 85, 84, 84), fontSize: 36));
   final background = SpriteComponent();
-  final girl = SpriteComponent();
-  final boy = SpriteComponent();
+  late CharacterComponent girl;
+  late CharacterComponent boy;
   late final ButtonComponent forwardButtonComponent;
   // to control flow with button presses
   Completer<void> _forwardCompleter = Completer();
@@ -25,17 +26,20 @@ class ProjectViewComponent extends PositionComponent
 
   @override
   FutureOr<void> onLoad() {
+    girl = CharacterComponent(
+        sprites: [gameRef.girlSprite, gameRef.girlSurprisedSprite],
+        startLocation: CharacterStartLocation.left)
+      ..size = Vector2(gameRef.size.y / 2, gameRef.size.y);
     background
       ..sprite = gameRef.boatBackgroundSprite
       ..size = gameRef.size;
-    girl
-      ..sprite = gameRef.girlSprite
-      ..size = Vector2(400, 800);
-
-    boy
-      ..sprite = gameRef.boySprite
-      ..size = Vector2(400, 800)
-      ..position = Vector2(gameRef.size.x * .7, 0);
+    boy = CharacterComponent(
+        sprites: [gameRef.boySprite],
+        startLocation: CharacterStartLocation.right)
+      ..size = Vector2(gameRef.size.y / 2, gameRef.size.y);
+    // ..sprite = gameRef.boySprite
+    // ..size = Vector2(400, 800)
+    // ..position = Vector2(gameRef.size.x * .7, 0);
 
     forwardButtonComponent = ButtonComponent(
         button: PositionComponent(),
@@ -109,7 +113,7 @@ class ProjectViewComponent extends PositionComponent
         break;
       case 'Beach':
         background.sprite = gameRef.beachBackgroundSprite;
-        girl.sprite = gameRef.girlSurprisedSprite;
+        // girl.sprite = gameRef.girlSurprisedSprite;
         break;
     }
     return super.onNodeStart(node);

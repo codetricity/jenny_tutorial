@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart' show rootBundle;
 import 'package:jenny/jenny.dart';
 
-import 'project_view_component.dart';
+import 'world/project_view_component.dart';
 
 void main() {
   runApp(
