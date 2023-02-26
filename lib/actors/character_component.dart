@@ -8,7 +8,7 @@ enum CharacterDirection { left, right }
 enum CharacterStartLocation { left, right }
 
 class CharacterComponent extends SpriteComponent with HasGameRef {
-  final List<Sprite> sprites;
+  List<Sprite> sprites;
   final double movementSpeed;
   final CharacterStartLocation startLocation;
   final double maxTimeToMove;

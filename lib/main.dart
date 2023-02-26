@@ -22,6 +22,9 @@ class JennyGame extends FlameGame with HasTappables {
   late Sprite beachBackgroundSprite;
   late Sprite girlSprite;
   late Sprite girlSurprisedSprite;
+  late Sprite akemiSwimwearSprite;
+  late Sprite kenSwimwearSprite;
+
   late Sprite boySprite;
   YarnProject yarnProject = YarnProject();
   ProjectViewComponent projectViewComponent = ProjectViewComponent();
@@ -33,6 +36,9 @@ class JennyGame extends FlameGame with HasTappables {
     beachBackgroundSprite = await loadSprite('beach.webp');
     girlSprite = await loadSprite('girl.webp');
     girlSurprisedSprite = await loadSprite('akemi_surprised.webp');
+    akemiSwimwearSprite =
+        await loadSprite('akemi/akemi_swimwear_surprised.webp');
+    kenSwimwearSprite = await loadSprite('ken/ken_swimwear_concerned.webp');
     boySprite = await loadSprite('guy.webp');
 
     String startDialogueData =

@@ -30,6 +30,7 @@ class ProjectViewComponent extends PositionComponent
         sprites: [gameRef.girlSprite, gameRef.girlSurprisedSprite],
         startLocation: CharacterStartLocation.left)
       ..size = Vector2(gameRef.size.y / 2, gameRef.size.y);
+
     background
       ..sprite = gameRef.boatBackgroundSprite
       ..size = gameRef.size;
@@ -50,6 +51,7 @@ class ProjectViewComponent extends PositionComponent
           }
         });
     mainDialogueTextComponent = TextBoxComponent(
+      priority: 5,
       text: 'Press next to begin the story of Ken and Akemi',
       position: Vector2(50, gameRef.size.y * .8),
       boxConfig: TextBoxConfig(maxWidth: gameRef.size.x * .8),
@@ -114,6 +116,17 @@ class ProjectViewComponent extends PositionComponent
       case 'Beach':
         background.sprite = gameRef.beachBackgroundSprite;
         // girl.sprite = gameRef.girlSurprisedSprite;
+        girl.removeFromParent();
+        add(girl = CharacterComponent(
+            sprites: [gameRef.akemiSwimwearSprite],
+            startLocation: CharacterStartLocation.left)
+          ..size = Vector2(gameRef.size.y / 2, gameRef.size.y)
+          ..priority = 2);
+        boy.removeFromParent();
+        add(boy = CharacterComponent(
+            sprites: [gameRef.kenSwimwearSprite],
+            startLocation: CharacterStartLocation.right)
+          ..size = Vector2(gameRef.size.y / 2, gameRef.size.y));
         break;
     }
     return super.onNodeStart(node);
