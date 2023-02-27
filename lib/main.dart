@@ -53,6 +53,7 @@ class JennyGame extends FlameGame with HasTappables {
         yarnProject: yarnProject, dialogueViews: [projectViewComponent]);
     dialogueRunner.startDialogue('Boat_Meeting');
     add(projectViewComponent);
+
     return super.onLoad();
   }
 }

@@ -106,6 +106,9 @@ class ProjectViewComponent extends PositionComponent
 
   @override
   FutureOr<void> onNodeStart(Node node) {
+    debugPrint('debug: ${gameRef.yarnProject.variables.variables}');
+    debugPrint(node.title);
+
     switch (node.title) {
       case 'Cafe':
         background.sprite = gameRef.cafeBackgroundSprite;
