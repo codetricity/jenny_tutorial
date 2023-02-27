@@ -106,10 +106,15 @@ class ProjectViewComponent extends PositionComponent
   }
 
   @override
-  FutureOr<void> onNodeStart(Node node) {
+  FutureOr<void> onNodeStart(Node node) async {
     // debugPrint('debug: ${gameRef.yarnProject.variables.variables}');
     debugPrint(node.title);
-    gameRef.isarService.addStoryNode(StoryNode()..nodeName = node.title);
+    if (await gameRef.isarService.getFirstStoryNode() == 'Start_Story') {
+      gameRef.isarService.addStoryNode(StoryNode()..nodeName = node.title);
+    } else {
+      debugPrint('debug: update story node');
+      gameRef.isarService.updateStoryNode(node.title);
+    }
 
     switch (node.title) {
       case 'Cafe':
