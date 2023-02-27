@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:jenny/jenny.dart';
 
 import 'character_component.dart';
+import 'data/story_node.dart';
 import 'main.dart';
 
 class ProjectViewComponent extends PositionComponent
@@ -106,8 +107,9 @@ class ProjectViewComponent extends PositionComponent
 
   @override
   FutureOr<void> onNodeStart(Node node) {
-    debugPrint('debug: ${gameRef.yarnProject.variables.variables}');
+    // debugPrint('debug: ${gameRef.yarnProject.variables.variables}');
     debugPrint(node.title);
+    gameRef.isarService.addStoryNode(StoryNode()..nodeName = node.title);
 
     switch (node.title) {
       case 'Cafe':
@@ -140,7 +142,8 @@ class ProjectViewComponent extends PositionComponent
     var characterName = line.character?.name ?? '';
     var dialogueLineText = '$characterName: ${line.text}';
     mainDialogueTextComponent.text = dialogueLineText;
-    debugPrint('debug: $dialogueLineText');
+    // debugPrint('debug: $dialogueLineText');
+
     return _forwardCompleter.future;
   }
 }

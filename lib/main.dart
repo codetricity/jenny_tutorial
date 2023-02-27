@@ -7,6 +7,7 @@ import 'package:flutter/services.dart' show rootBundle;
 import 'package:jenny/jenny.dart';
 
 import 'project_view_component.dart';
+import 'services/isar_service.dart';
 
 void main() {
   runApp(
@@ -28,6 +29,8 @@ class JennyGame extends FlameGame with HasTappables {
   YarnProject yarnProject = YarnProject();
   ProjectViewComponent projectViewComponent = ProjectViewComponent();
 
+  // using Isar for data persistence.
+  final isarService = IsarService();
   @override
   FutureOr<void> onLoad() async {
     boatBackgroundSprite = await loadSprite('boat.webp');
